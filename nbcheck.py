@@ -9,6 +9,9 @@ def nbcheck(nbdirs):
     Given a list of directories pointing to Jupyter notebooks, checks that code cells
     are run in order.
 
+    Note: Usage of f-strings in this code requires Python 3.6, introduced in
+    [PEP 498](https://www.python.org/dev/peps/pep-0498/)
+
     Usage
     -----
     >>> nbdirs = ["notebook1.ipynb", "notebook2.ipynb"]
@@ -30,8 +33,12 @@ def nbcheck(nbdirs):
 
     for nbdir in nbdirs:
         # Load notebook
-        with open(nbdir, "r") as f:
-            file = json.load(f)
+        try:
+            with open(nbdir, "r") as f:
+                file = json.load(f)
+        except json.decoder.JSONDecodeError:
+            print(f"{nbdir}: Not a notebook, skipped!")
+            continue
 
         # Retrieve cells only as a list
         cells = file["cells"]
