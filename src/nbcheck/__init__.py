@@ -4,6 +4,7 @@
 import sys
 import json
 
+
 def nbcheck(nbdirs):
     """
     Given a list of directories pointing to Jupyter notebooks, checks that code cells
@@ -59,7 +60,7 @@ def nbcheck(nbdirs):
 
         for i in range(1, num_cells):
             # Use less than since all `execution_count` numbers are unique
-            if cells[i]["execution_count"] < cells[i-1]["execution_count"]:
+            if cells[i]["execution_count"] < cells[i - 1]["execution_count"]:
                 cells_out_of_order.append(i)
 
         # Track results
@@ -71,11 +72,10 @@ def nbcheck(nbdirs):
         else:
             print(f"{nbdir}: {len(cells_out_of_order)} cells executed out of order!")
             print(f"{nbdir}: Cells: {cells_out_of_order}")
-        
+
     return results
 
-
-if __name__ == "__main__":
+def cli_nbcheck():
     # Retrieve list of notebook(s)
     nbdirs = sys.argv[1:]
 
