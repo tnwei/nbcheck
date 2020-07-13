@@ -4,6 +4,9 @@
 import sys
 import json
 
+# Single source versioning
+# Learnt from https://stackoverflow.com/a/7071358/13095028
+from __version import __version__
 
 def nbcheck(nbdirs):
     """

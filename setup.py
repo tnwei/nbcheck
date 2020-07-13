@@ -1,7 +1,19 @@
 import setuptools
+import re
 
 with open("README.md", "r") as f:
     long_description = f.read()
+
+# Extract version number
+versionfile = "src/nbcheck/__version.py"
+with open(versionfile, "r") as f:
+    line = f.read().strip()
+find_ver = re.search('\\"(.*?)\"', line)
+
+if find_ver:
+    version=find_ver.group(1)
+else:
+    raise RuntimeError("Version string not found in version file: %s" % versionfile)
 
 setuptools.setup(
     name="nbcheck",
