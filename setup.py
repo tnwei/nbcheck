@@ -17,7 +17,7 @@ else:
 
 setuptools.setup(
     name="nbcheck",
-    version="0.0.1",
+    version=version,
     author="Tan Nian Wei",
     author_email="tannianwei@aggienetwork.com",
     description="Simple CLI tool to highlight Jupyter cells run out of order",
