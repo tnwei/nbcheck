@@ -96,4 +96,5 @@ def cli_nbcheck():
     nbdirs = sys.argv[1:]
 
     # Run check
-    nbcheck(nbdirs)
+    results = nbcheck(nbdirs)
+    return results
