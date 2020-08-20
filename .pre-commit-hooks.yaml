@@ -2,3 +2,4 @@
    name: Check Jupyter notebook cells executed out of order
    entry: nbcheck 
    language: python 
+   pass_filenames: true
