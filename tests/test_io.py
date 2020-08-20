@@ -26,6 +26,6 @@ def test_multiple_files():
         fdir / "no-code-cells.ipynb",
         fdir / "not-a-notebook.txt"
     ]
-    results = nbcheck(nbdirs)
+    results = nbcheck(nbdirs, return_ooo_cells=True)
     expected_results = dict(zip(nbdirs, [[3, 7], [], []]))
     assert results == expected_results

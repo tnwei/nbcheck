@@ -15,7 +15,7 @@ def test_notebook_in_order():
     {'tests/cells-in-order.ipynb': []}
     """
     nbdirs = [fdir / "cells-in-order.ipynb"]
-    results = nbcheck(nbdirs)
+    results = nbcheck(nbdirs, return_ooo_cells=True)
     expected_results = dict(zip(nbdirs, [[]]))
     assert results == expected_results
 
@@ -33,7 +33,7 @@ def test_notebook_not_in_order():
     {'tests/cells-not-in-order.ipynb': [3, 7]}
     """
     nbdirs = [fdir / "cells-not-in-order.ipynb"]
-    results = nbcheck(nbdirs)
+    results = nbcheck(nbdirs, return_ooo_cells=True)
     expected_results = dict(zip(nbdirs, [[3, 7]]))
     assert results == expected_results
 
@@ -49,7 +49,7 @@ def test_no_code_cells():
     {'tests/no-code-cells.ipynb': []}
     """
     nbdirs = [fdir / "no-code-cells.ipynb"]
-    results = nbcheck(nbdirs)
+    results = nbcheck(nbdirs, return_ooo_cells=True)
     expected_results = dict(zip(nbdirs, [[]]))
     assert results == expected_results
 
@@ -66,6 +66,6 @@ def test_not_a_notebook():
     {}
     """
     nbdirs = [fdir / "not-a-notebook.txt"]
-    results = nbcheck(nbdirs)
+    results = nbcheck(nbdirs, return_ooo_cells=True)
     expected_results = {}
     assert results == expected_results

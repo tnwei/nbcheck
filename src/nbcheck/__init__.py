@@ -8,7 +8,7 @@ import json
 # Learnt from https://stackoverflow.com/a/7071358/13095028
 from .__version import __version__
 
-def nbcheck(nbdirs):
+def nbcheck(nbdirs, return_ooo_cells=False):
     """
     Given a list of directories pointing to Jupyter notebooks, checks that code cells
     are run in order.
@@ -28,10 +28,15 @@ def nbcheck(nbdirs):
         Note `open()` wasn't able to handle PathLikes until the ability was introduced in
         Python 3.6 via [PEP 519](https://www.python.org/dev/peps/pep-0519/)
 
+    return_ooo_cells: bool
+        Returns out-of-order cells instead of 0 / 1 if True. Primarily for testing purposes only.
+
+
     Output
     ------
-    results: dict
-        Returns dict w/ format {nbdir: cells_out_of_order} for testing purposes
+    results: boolean / dict
+        If return_ooo_cells is True, returns dict w/ format {nbdir: cells_out_of_order} for testing purposes.
+        Else, returns 0 for perfect notebooks, and returns 1 for notebooks w/ cells out of order.
     """
     results = {}
 
@@ -72,11 +77,19 @@ def nbcheck(nbdirs):
         # Print closing message
         if len(cells_out_of_order) == 0:
             print(f"{nbdir}: All cells executed in order!")
+
         else:
             print(f"{nbdir}: {len(cells_out_of_order)} cells executed out of order!")
             print(f"{nbdir}: Cells: {cells_out_of_order}")
 
-    return results
+    if return_ooo_cells is False:
+        if len(results) == 0:
+            return 0
+        else:
+            return 1
+    else:
+        return results
+
 
 def cli_nbcheck():
     # Retrieve list of notebook(s)
